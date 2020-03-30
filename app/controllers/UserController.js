@@ -7,7 +7,7 @@ module.exports = {
     
     const users = await user.findAll();
 
-    return res.send({ users });
+    return res.json(users);
   
   },
 
