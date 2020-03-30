@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const timeout = require('connect-timeout')
 
 //inicia o express
 const app = express();
