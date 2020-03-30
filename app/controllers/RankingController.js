@@ -76,23 +76,8 @@ module.exports = {
       return res.json({ error: "Phase not exists" });
     }
 
-    // const MatcheExists = await matche.findAll({
-    //   where: { 
-    //     [Op.and]: [
-    //       { userId },
-    //       { phaseId }
-    //     ]
-    //   }
-    // });
-    // console.log(MatcheExists);
-    
-    // if (MatcheExists.length !== 0) {
-      
-    //   return res.json({ error: "Matche already related" });
-    // }
-
     const MatcheCreated = await matche.create(req.body);
 
     return res.json({ MatcheCreated, message: "Matche successfully inserted" });
   }
-}
+};

@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       as: 'phases',
       foreignkey: 'userId',
     });
+    user.hasMany(models.ranking, {
+      foreignKey: 'userId'
+    });
+
   }
   
 

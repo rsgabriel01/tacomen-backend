@@ -4,13 +4,13 @@ module.exports = (sequelize, DataTypes) => {
   const matche = sequelize.define(
     "matche",
     {
-      userId: DataTypes.STRING,
-      phaseId: DataTypes.STRING,
-      jump: DataTypes.STRING,
-      point: DataTypes.STRING,
-      timer: DataTypes.STRING,
-      enemy_killed: DataTypes.STRING,
-      death: DataTypes.STRING
+      userId: DataTypes.INTEGER,
+      phaseId: DataTypes.INTEGER,
+      jump: DataTypes.INTEGER,
+      point: DataTypes.INTEGER,
+      timer: DataTypes.TIME,
+      enemy_killed: DataTypes.INTEGER,
+      death: DataTypes.INTEGER
       
     },
     {
