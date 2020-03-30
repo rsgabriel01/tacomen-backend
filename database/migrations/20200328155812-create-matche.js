@@ -56,7 +56,7 @@ module.exports = {
     },
     {
       tableName: 'matche',
-      // freezeTableName: true,
+      freezeTableName: true
       // timestamps: true
     });
   },

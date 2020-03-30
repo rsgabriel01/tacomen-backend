@@ -37,11 +37,18 @@ routes.get("/phases/paginate", PhaseController.allPhasesPaginate);
 routes.post("/phases/create", PhaseController.createPhase);
 
 //Matche
-routes.get("/usersPhases", MatcheController.allMatches);
+routes.get("/matche", MatcheController.allMatches);
 
-routes.get("/usersPhases/paginate", MatcheController.allMatchesPaginate);
+routes.get("/matche/paginate", MatcheController.allMatchesPaginate);
 
-routes.post("/usersPhases/create", MatcheController.createMatche);
+routes.post("/matche/create", MatcheController.createMatche);
+
+//Ranking
+// routes.get("/ranking", MatcheController.allMatches);
+
+// routes.get("/ranking/paginate", MatcheController.allMatchesPaginate);
+
+// routes.post("/ranking/create", MatcheController.createMatche);
 
 // routes.get("/people/:id", UserController.findOneUsers);
 

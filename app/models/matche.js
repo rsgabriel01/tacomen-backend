@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       death: DataTypes.STRING
       
     },
-    // {
-    //   freezeTableName: true,
+    {
+      freezeTableName: true
     //   timestamps: false
-    // }
+    }
   );
   
   matche.associate = (models) => {
