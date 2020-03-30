@@ -5,9 +5,17 @@ module.exports = {
   async allUsers(req, res) {
     console.log('acessado users');
     
-    const users = await user.findAll();
+    try {
+      const users = await user.findAll();
 
-    return res.json(users);
+      return res.json(users);
+    } catch (error) {
+      console.log(error);
+      
+      return res.json(error);
+    
+    }
+    
   },
 
   async allUsersPaginate(req, res) {
