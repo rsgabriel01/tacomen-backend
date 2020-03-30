@@ -7,15 +7,8 @@ module.exports = {
     
     const users = await user.findAll();
 
-    try {
-      return res.json(users);
-    } catch (error) {
-      console.log(error);
-      
-      return res.json(error);
-    
-    }
-    
+    return res.send({ users });
+  
   },
 
   async allUsersPaginate(req, res) {
