@@ -6,9 +6,9 @@ const { Op } = require("sequelize");
 
 module.exports = {
   async allMatches(req, res) {
-    const users_phases = await matche.findAll();
+    const matches = await matche.findAll();
 
-    return res.json(users_phases);
+    return res.json(matches);
   },
 
   async allMatchesPaginate(req, res) {
@@ -19,9 +19,9 @@ module.exports = {
       paginate: 10
     };
 
-    const users_phases = await matche.paginate(options);
+    const matches = await matche.paginate(options);
 
-    return res.json({ users_phases, pageNumber: page });
+    return res.json({ matches, pageNumber: page });
   },
   async createMatche(req, res) {
     const { userId } = req.body;
