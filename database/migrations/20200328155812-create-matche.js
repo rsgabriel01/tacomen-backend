@@ -45,16 +45,19 @@ module.exports = {
         allowNull: false,
         type: DataTypes.INTEGER
       },
-      date_time: {
+      createdAt: {
         allowNull: false,
-        type: 'TIMESTAMP',
-        defaultValue:Sequelize.literal('CURRENT_TIMESTAMP')
+        type: DataTypes.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE
       }
     },
     {
       tableName: 'matche',
-      freezeTableName: true,
-      timestamps: true
+      // freezeTableName: true,
+      // timestamps: true
     });
   },
 
