@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable("user_phase", {
+    return queryInterface.createTable("matche", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -35,7 +35,7 @@ module.exports = {
       },
       timer: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.TIME
       },
       enemy_killed: {
         allowNull: false,
@@ -44,16 +44,21 @@ module.exports = {
       death: {
         allowNull: false,
         type: DataTypes.INTEGER
+      },
+      date_time: {
+        allowNull: false,
+        type: 'TIMESTAMP',
+        defaultValue:Sequelize.literal('CURRENT_TIMESTAMP')
       }
     },
     {
-      tableName: 'user_phase',
+      tableName: 'matche',
       freezeTableName: true,
-      timestamps: false
+      timestamps: true
     });
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable("user_phase");
+    return queryInterface.dropTable("matche");
   }
 };

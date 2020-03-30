@@ -1,8 +1,8 @@
 const sequelizePaginate = require("sequelize-paginate");
 
 module.exports = (sequelize, DataTypes) => {
-  const user_phase = sequelize.define(
-    "user_phase",
+  const matche = sequelize.define(
+    "matche",
     {
       userId: DataTypes.STRING,
       phaseId: DataTypes.STRING,
@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   
-  user_phase.associate = (models) => {
-    user_phase.belongsTo(models.user, {foreignKey: 'id'})
-    user_phase.belongsTo(models.phase, {foreignKey: 'id'})
+  matche.associate = (models) => {
+    matche.belongsTo(models.user, {foreignKey: 'id'})
+    matche.belongsTo(models.phase, {foreignKey: 'id'})
   };
   
-  sequelizePaginate.paginate(user_phase);
-  return user_phase;
+  sequelizePaginate.paginate(matche);
+  return matche;
 };

@@ -3,7 +3,7 @@ const routes = express.Router();
 
 const UserController = require("./controllers/UserController");
 const PhaseController = require("./controllers/PhaseController");
-const User_phaseController = require("./controllers/User_phaseController");
+const MatcheController = require("./controllers/MatcheController");
 const SessionController = require("./controllers/SessionControler");
 
 routes.get("/", (req, res) => {
@@ -36,12 +36,12 @@ routes.get("/phases/paginate", PhaseController.allPhasesPaginate);
 
 routes.post("/phases/create", PhaseController.createPhase);
 
-//User_phase
-routes.get("/usersPhases", User_phaseController.allUser_phase);
+//Matche
+routes.get("/usersPhases", MatcheController.allMatches);
 
-routes.get("/usersPhases/paginate", User_phaseController.allUser_phasePaginate);
+routes.get("/usersPhases/paginate", MatcheController.allMatchesPaginate);
 
-routes.post("/usersPhases/create", User_phaseController.createUser_phase);
+routes.post("/usersPhases/create", MatcheController.createMatche);
 
 // routes.get("/people/:id", UserController.findOneUsers);
 

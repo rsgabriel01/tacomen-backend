@@ -1,17 +1,17 @@
-const { user_phase } = require("../models");
+const { matche } = require("../models");
 const { user } = require("../models");
 const { phase } = require("../models");
 const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
 
 module.exports = {
-  async allUser_phase(req, res) {
-    const users_phases = await user_phase.findAll();
+  async allMatches(req, res) {
+    const users_phases = await matche.findAll();
 
     return res.json(users_phases);
   },
 
-  async allUser_phasePaginate(req, res) {
+  async allMatchesPaginate(req, res) {
     const { page = 1 } = req.query;
 
     const options = {
@@ -19,11 +19,11 @@ module.exports = {
       paginate: 10
     };
 
-    const users_phases = await user_phase.paginate(options);
+    const users_phases = await matche.paginate(options);
 
     return res.json({ users_phases, pageNumber: page });
   },
-  async createUser_phase(req, res) {
+  async createMatche(req, res) {
     const { userId } = req.body;
     const { phaseId } = req.body;
     const { jump } = req.body;
@@ -76,7 +76,7 @@ module.exports = {
       return res.json({ error: "Phase not exists" });
     }
 
-    const UserPhaseExists = await user_phase.findAll({
+    const MatcheExists = await matche.findAll({
       where: { 
         [Op.and]: [
           { userId },
@@ -84,16 +84,16 @@ module.exports = {
         ]
       }
     });
-    console.log(UserPhaseExists);
+    console.log(MatcheExists);
     
-    if (UserPhaseExists.length !== 0) {
+    if (MatcheExists.length !== 0) {
       
-      return res.json({ error: "User phase already related" });
+      return res.json({ error: "Matche already related" });
     }
 
-    const phase_userCreated = await user_phase.create(req.body);
+    const MatcheCreated = await matche.create(req.body);
 
-    return res.json({ phase_userCreated, message: "User_phase successfully inserted" });
+    return res.json({ MatcheCreated, message: "Matche successfully inserted" });
   }
 
   // async allPeopleLikeName(req, res) {
