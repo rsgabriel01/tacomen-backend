@@ -10,6 +10,10 @@ routes.get("/", (req, res) => {
   return res.send("Server is running...");
 });
 
+routes.get("/teste", (req, res) => {
+  return res.json("teste");
+});
+
 //User
 routes.get("/users", UserController.allUsers);
 
