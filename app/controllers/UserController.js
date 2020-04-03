@@ -2,8 +2,7 @@ const { user } = require("../models");
 const Sequelize = require("sequelize");
 
 module.exports = {
-  async allUsers(req, res) {
-    console.log('acessado users');
+  async index(req, res) {
     try {
       const users = await user.findAll();
 
@@ -13,7 +12,7 @@ module.exports = {
     }
   },
 
-  async allUsersPaginate(req, res) {
+  async indexPaginate(req, res) {
     const { page = 1 } = req.query;
 
     const options = {

@@ -16,9 +16,16 @@ routes.get("/teste", (req, res) => {
 });
 
 //User
-routes.get("/users", UserController.allUsers);
+routes.get("/users", UserController.index);
 
-routes.get("/users/paginate", UserController.allUsersPaginate);
+routes.get("/users/paginate",
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      page: Joi.number(), 
+    })  
+  }),
+  UserController.indexPaginate
+);
 
 routes.post("/users/create", UserController.createUser);
 
@@ -26,12 +33,15 @@ routes.get("/users/:id", UserController.findOneUser);
 
 //Session
 
-routes.post("/session/logon",  celebrate({
-  [Segments.BODY] : Joi.object().keys({
-     login : Joi.string().required(),
-     password : Joi.string().required().min(8).max(16)
-  })  
-}), SessionController.logon);
+routes.post("/session/logon",  
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      login: Joi.string().required(),
+      password: Joi.string().required().min(8).max(16)
+    })  
+  }), 
+  SessionController.logon
+);
 
 
 //Phase
