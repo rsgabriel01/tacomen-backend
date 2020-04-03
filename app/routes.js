@@ -25,7 +25,6 @@ routes.post("/users/create", UserController.createUser);
 routes.get("/users/:id", UserController.findOneUser);
 
 //Session
-routes.get("/session/:loginSearch", SessionController.findOneUserLogin);
 
 routes.post("/session/logon",  celebrate({
   [Segments.BODY] : Joi.object().keys({
