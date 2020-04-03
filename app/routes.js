@@ -11,10 +11,6 @@ routes.get("/", (req, res) => {
   return res.send("Server is running...");
 });
 
-routes.get("/teste", (req, res) => {
-  return res.json("teste");
-});
-
 //User
 routes.get("/users", UserController.index);
 
@@ -35,10 +31,17 @@ routes.post("/users/create",
       password: Joi.string().required().min(8).max(16)
     })  
   }),
-  UserController.create
+  UserController.store
 );
 
-routes.get("/users/:id", UserController.findOneUser);
+routes.get("/users/:id",
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      page: Joi.number(), 
+    })  
+  }),
+  UserController.show
+);
 
 //Session
 

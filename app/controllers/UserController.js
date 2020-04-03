@@ -25,7 +25,7 @@ module.exports = {
     return res.json({ users, pageNumber: page });
   },
 
-  async create(req, res) {
+  async store(req, res) {
     const { email, login } = req.body;
 
     const emailExists = await user.findOne({
@@ -49,7 +49,7 @@ module.exports = {
     return res.json({ userCreated, message: "User successfully created" });
   },
 
-  async findOneUser(req, res) {
+  async show(req, res) {
     const { id } = req.params;
 
     const idExists = await user.findOne({
