@@ -25,22 +25,8 @@ module.exports = {
     return res.json({ users, pageNumber: page });
   },
 
-  async createUser(req, res) {
-    const { email } = req.body;
-    const { login } = req.body;
-    const { password } = req.body;
-
-    if (!email) {
-      return res.json({ message: "Email is empty" });
-    }
-
-    if (!login) {
-      return res.json({ message: "Login is empty" });
-    }
-
-    if (!password) {
-      return res.json({ message: "Password is empty" });
-    }
+  async create(req, res) {
+    const { email, login } = req.body;
 
     const emailExists = await user.findOne({
       where: { email }
@@ -58,13 +44,9 @@ module.exports = {
       return res.json({ message: "Login already exists" });
     }
 
-    if (password.length < 8 ||password.length > 16) {
-      return res.json({ message: "Password less than 8 or greater than 16 characters" });
-    }
-
     const userCreated = await user.create(req.body);
 
-    return res.json({ userCreated, message: "User successfully inserted" });
+    return res.json({ userCreated, message: "User successfully created" });
   },
 
   async findOneUser(req, res) {

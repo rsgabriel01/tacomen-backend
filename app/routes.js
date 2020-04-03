@@ -27,7 +27,16 @@ routes.get("/users/paginate",
   UserController.indexPaginate
 );
 
-routes.post("/users/create", UserController.createUser);
+routes.post("/users/create",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      email: Joi.string().required().email(),
+      login: Joi.string().required(),
+      password: Joi.string().required().min(8).max(16)
+    })  
+  }),
+  UserController.create
+);
 
 routes.get("/users/:id", UserController.findOneUser);
 
