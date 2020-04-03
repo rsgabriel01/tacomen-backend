@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const { errors } = require('celebrate')
+const routes = require('./app/routes')
 
 //inicia o express
 const app = express();
@@ -10,12 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use("/api", routes);
+app.use(errors());
 
-//todos os tipo de requisições são redirecionados para o arquivos de rotas
-app.use("/api", require("./app/routes"));
-
-
-//Servidor irá ficar "ouvindo" a porta 3000
 app.listen(process.env.PORT || 3001);
 
 console.log("Server is running...");

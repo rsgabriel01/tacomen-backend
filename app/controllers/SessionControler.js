@@ -19,42 +19,33 @@ module.exports = {
         return res.json({"login" : login});
     },
 
-    async loginPassword(req, res) {
-      const loginReq = req.body.login
-      const { password } = req.body;
-
-      if (!loginReq) {
-        return res.json({ attention: "Login is empty" });
-      }
-  
-      if (!password) {
-        return res.json({ attention: "Password is empty" });
-      }
+    async logon(req, res) {
+      const { login, password } = req.body;
   
       const loginExists = await user.findOne({
-        where: { login : loginReq}
+        where: { login }
       });
   
       if (!loginExists) {
         return res.json({ attention: "Login not found" });
       }
 
-      const [ login ] = await user.findAll({
+      const loginFinded = await user.findOne({
         where: { 
           [Op.and]: [
-            { login : loginReq},
+            { login },
             { password }
           ]
         }
       });
       
-      console.log(login);
+      // console.log(login);
       
-      if (login === undefined) {
+      if (!loginFinded) {
         return res.json({ attention: "Incorrect password" });
       }
       
-      return res.json(login.login);
+      return res.json(loginFinded);
   }
 
 };

@@ -1,4 +1,5 @@
 const express = require("express");
+const { celebrate, Segments, Joi } = require('celebrate');
 const routes = express.Router();
 
 const UserController = require("./controllers/UserController");
@@ -26,7 +27,12 @@ routes.get("/users/:id", UserController.findOneUser);
 //Session
 routes.get("/session/:loginSearch", SessionController.findOneUserLogin);
 
-routes.post("/session/loginPassword", SessionController.loginPassword);
+routes.post("/session/logon",  celebrate({
+  [Segments.BODY] : Joi.object().keys({
+     login : Joi.string().required(),
+     password : Joi.string().required().min(8).max(16)
+  })  
+}), SessionController.logon);
 
 
 //Phase
