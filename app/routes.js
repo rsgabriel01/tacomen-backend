@@ -37,7 +37,7 @@ routes.post("/users/create",
 routes.get("/users/:id",
   celebrate({
     [Segments.PARAMS]: Joi.object().keys({
-      page: Joi.number(), 
+      id: Joi.number(), 
     })  
   }),
   UserController.show
