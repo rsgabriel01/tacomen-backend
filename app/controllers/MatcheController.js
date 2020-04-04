@@ -8,11 +8,7 @@ const rawQueries = require('../../config/rawQueries')
 
 module.exports = {
   async index(req, res) {
-    const matches = await matche.findAll({
-      include: [{
-        model: user,
-      }]
-    });
+    const matches = await matche.findAll();
 
     return res.json(matches);
   },
