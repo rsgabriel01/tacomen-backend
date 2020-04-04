@@ -5,13 +5,14 @@ const routes = express.Router();
 const UserController = require("./controllers/UserController");
 const PhaseController = require("./controllers/PhaseController");
 const MatcheController = require("./controllers/MatcheController");
-const SessionController = require("./controllers/SessionControler");
+const SessionController = require("./controllers/SessionController");
+const UserPhaseController = require("./controllers/UserPhaseController");
 
 routes.get("/", (req, res) => {
   return res.send("Server is running...");
 });
 
-//User
+//User -------------------------------------------------------------------------
 routes.get("/users", UserController.index);
 
 routes.get("/users/paginate",
@@ -43,7 +44,7 @@ routes.get("/users/:id",
   UserController.show
 );
 
-//Session
+//Session ----------------------------------------------------------------------
 
 routes.post("/session/logon",  
   celebrate({
@@ -56,23 +57,73 @@ routes.post("/session/logon",
 );
 
 
-//Phase
+//Phase ------------------------------------------------------------------------
 routes.get("/phases", PhaseController.allPhases);
 
 routes.get("/phases/paginate", PhaseController.allPhasesPaginate);
 
 routes.post("/phases/create", PhaseController.createPhase);
 
-//Matche
-routes.get("/matche", MatcheController.allMatches);
+//UserPhase --------------------------------------------------------------------
+routes.get("/userPhase", UserPhaseController.index);
 
-routes.get("/matche/testRanking", MatcheController.testRanking);
+routes.get("/userPhase/paginate",
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      page: Joi.number(), 
+    })  
+  }),
+  UserPhaseController.indexPaginate
+);
 
-routes.get("/matche/paginate", MatcheController.allMatchesPaginate);
+routes.post("/userPhase/create",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      userId: Joi.number().required(),
+      phaseId: Joi.number().required(),
+    })  
+  }),
+  UserPhaseController.store
+);
 
-routes.post("/matche/create", MatcheController.createMatche);
+routes.get("/userPhase/show",
+celebrate({
+  [Segments.QUERY]: Joi.object().keys({
+    userId: Joi.number().required(), 
+    phaseId: Joi.number().required() 
+  })  
+}),
+  UserPhaseController.show
+);
 
-//Ranking
+//Matche -----------------------------------------------------------------------
+routes.get("/matche", MatcheController.index);
+
+routes.get("/matche/paginate",
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      page: Joi.number(), 
+    })  
+  }),
+  MatcheController.indexPaginate
+);
+
+routes.post("/matche/create", 
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      userId: Joi.number().required(),
+      phaseId: Joi.number().required(),
+      jump: Joi.number().required(),
+      point: Joi.number().required(),
+      timer: Joi.string().required(),
+      enemy_killed: Joi.number().required(),
+      death: Joi.number().required(),
+    })  
+  }),
+  MatcheController.store
+);
+
+//Ranking ----------------------------------------------------------------------
 // routes.get("/ranking", MatcheController.allMatches);
 
 // routes.get("/ranking/paginate", MatcheController.allMatchesPaginate);
