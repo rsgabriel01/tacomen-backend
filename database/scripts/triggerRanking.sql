@@ -17,7 +17,7 @@ INSERT INTO ranking ("userId", total_jump, total_point, total_death, total_time,
 			SUM(enemy_killed) As total_enemy_killed
 		FROM (SELECT 	UP."userId" AS "userId", --1
 			  			UP."phaseId" AS "phaseId",
-	 					max(jump) AS jump, --2
+	 					min(jump) AS jump, --2
 						max("point") AS "point", --3
 						min(death) AS death, --1
 	 					min(timer) AS timer, --00:59
@@ -37,7 +37,7 @@ UPDATE ranking SET  (total_jump, total_point, total_death, total_time, total_ene
 			SUM(enemy_killed) As total_enemy_killed
 		FROM (SELECT 	UP."userId" AS "userId", --1
 			  			UP."phaseId" AS "phaseId",
-	 					max(jump) AS jump, --2
+	 					min(jump) AS jump, --2
 						max("point") AS "point", --3
 						min(death) AS death, --1
 	 					min(timer) AS timer, --00:59
