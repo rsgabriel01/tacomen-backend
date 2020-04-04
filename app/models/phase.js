@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
   phase.associate = (models) => {
     phase.belongsToMany(models.user,{
-      through: models.matche,
+      through: models.userPhase,
       as: 'users',
       foreignkey: 'phaseId',
     });

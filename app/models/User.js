@@ -16,14 +16,13 @@ module.exports = (sequelize, DataTypes) => {
 
   user.associate = (models) => {
     user.belongsToMany(models.phase,{
-      through: models.matche,
+      through: models.userPhase,
       as: 'phases',
       foreignkey: 'userId',
     });
     user.hasMany(models.ranking, {
       foreignKey: 'userId'
     });
-
   }
   
 

@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const matche = sequelize.define(
     "matche",
     {
-      userId: DataTypes.INTEGER,
-      phaseId: DataTypes.INTEGER,
+      userPhaseId: DataTypes.INTEGER,
       jump: DataTypes.INTEGER,
       point: DataTypes.INTEGER,
       timer: DataTypes.TIME,
@@ -20,8 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   
   matche.associate = (models) => {
-    matche.belongsTo(models.user, {foreignKey: 'id'})
-    matche.belongsTo(models.phase, {foreignKey: 'id'})
+    matche.belongsTo(models.userPhase, {foreignKey: 'id'})
   };
   
   sequelizePaginate.paginate(matche);

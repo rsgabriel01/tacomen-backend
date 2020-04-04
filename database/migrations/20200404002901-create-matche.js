@@ -9,19 +9,11 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      userId: {
+      userPhaseMatcheId:{
         allowNull: false,
         type: DataTypes.INTEGER,
-        references: {         // user hasmany user_phase n:n
-          model: 'user',
-          key: 'id'
-        }
-      },
-      phaseId: {
-        allowNull: false,
-        type: DataTypes.INTEGER,
-        references: {         // user hasMany user_phase n:n
-          model: 'phase',
+        references: {
+          model: 'userPhase',
           key: 'id'
         }
       },

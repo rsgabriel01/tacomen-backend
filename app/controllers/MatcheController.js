@@ -1,12 +1,16 @@
 const { matche } = require("../models");
 const { user } = require("../models");
 const { phase } = require("../models");
-const Sequelize = require("sequelize");
-const { Op } = require("sequelize");
+const { Op, fn, col, literal, QueryTypes, Sequelize } = require("sequelize");
+const rawQueries = require('../../config/rawQueries')
 
 module.exports = {
   async allMatches(req, res) {
-    const matches = await matche.findAll();
+    const matches = await matche.findAll({
+      include: [{
+        model: user,
+      }]
+    });
 
     return res.json(matches);
   },
@@ -94,5 +98,49 @@ module.exports = {
     const MatcheCreated = await matche.create(req.body);
 
     return res.json({ MatcheCreated, message: "Matche successfully inserted" });
+  },
+  async testRanking(req, res) {
+    try {
+      const matches = await  rawQueries.query(
+        'SELECT "userId", ' + 
+                'SUM(jump) AS total_jump, ' +
+                'SUM("point") AS total_point, ' +
+                'SUM(death) AS total_death, ' +
+                'SUM(timer) AS total_time, ' +
+                'SUM(enemy_killed) As total_enemy_killed ' +
+              'FROM (SELECT 	UP."userId" AS "userId", ' +
+                'UP."phaseId" AS "phaseId", ' +
+                'max(jump) AS jump, ' +
+                'max("point") AS "point", ' +
+                'min(death) AS death, ' +
+                'min(timer) AS timer, ' +
+                'max(enemy_killed) As enemy_killed ' +
+                'FROM matche ' +
+              'INNER JOIN "userPhase" AS UP ON matche."userPhaseMatcheId" = UP.id ' +
+              'WHERE "userId" = 1 ' +
+              'GROUP BY "userId", "phaseId") AS totals_user ' +
+        'GROUP BY "userId"', {
+  type: QueryTypes.SELECT
+ });
+      // matche.findAll({
+      //   attributes: [
+      //     'userId', 
+      //     'phaseId', 
+      //     [fn('min', col('jump')), 'minJump'],
+      //     [fn('max', col('point')), 'maxPoint'],
+      //     [fn('min', col('death')), 'minDeath'],
+      //     [fn('min', col('timer')), 'minTimer'],
+      //     [fn('max', col('enemy_killed')), 'max_enemy_killed'],
+      //   ],
+      //   where: {
+      //     userId: 1
+      //   },
+      //   group: ['userId', 'phaseId']
+      // });
+
+      return res.json(matches);
+    } catch (error) {
+      console.log(error); 
+    }
   }
 }

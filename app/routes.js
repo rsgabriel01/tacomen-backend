@@ -66,6 +66,8 @@ routes.post("/phases/create", PhaseController.createPhase);
 //Matche
 routes.get("/matche", MatcheController.allMatches);
 
+routes.get("/matche/testRanking", MatcheController.testRanking);
+
 routes.get("/matche/paginate", MatcheController.allMatchesPaginate);
 
 routes.post("/matche/create", MatcheController.createMatche);
