@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      userPhaseMatcheId:{
+      userPhaseId:{
         allowNull: false,
         type: DataTypes.INTEGER,
         references: {

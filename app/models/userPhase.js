@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   
   userPhase.associate = (models) => {
-    userPhase.hasMany(models.matche, {foreignKey: 'userPhaseMatcheId'});
+    userPhase.hasMany(models.matche, {foreignKey: 'userPhaseId'});
     userPhase.belongsTo(models.user, {foreignKey: 'id'});
     userPhase.belongsTo(models.phase, {foreignKey: 'id'});
   };
