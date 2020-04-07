@@ -89,8 +89,7 @@ routes.post("/userPhase/create",
 routes.get("/userPhase/show",
 celebrate({
   [Segments.QUERY]: Joi.object().keys({
-    userId: Joi.number().required(), 
-    phaseId: Joi.number().required() 
+    userId: Joi.number().required()
   })  
 }),
   UserPhaseController.show
@@ -115,7 +114,7 @@ routes.post("/matche/create",
       phaseId: Joi.number().required(),
       jump: Joi.number().required(),
       point: Joi.number().required(),
-      timer: Joi.string().required(),
+      time: Joi.number().required(),
       enemy_killed: Joi.number().required(),
       death: Joi.number().required(),
     })  

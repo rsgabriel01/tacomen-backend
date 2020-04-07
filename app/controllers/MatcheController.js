@@ -30,10 +30,19 @@ module.exports = {
     const { phaseId} = req.body;
     const { jump } = req.body;
     const { point } = req.body;
-    const { timer } = req.body;
+    const { time } = req.body;
     const { enemy_killed } = req.body;
     const { death } = req.body;
 
+    console.log(req.body);
+    
+    let segundo = time % 60;
+    let minutos = time / 60;
+    let minuto = minutos % 60;
+    let hora = minutos / 60;
+    
+    let timer = Math.floor(hora) + ":" + Math.floor(minuto) + ":" + Math.floor(segundo);
+    
     const userExists = await user.findOne({
       where: { id: userId }
     });
@@ -54,8 +63,8 @@ module.exports = {
       where: { userId, phaseId }
     });
 
-    console.log(created);
-    console.log(userPhaseFinded);
+    // console.log(created);
+    // console.log(userPhaseFinded);
 
     const matcheCreated = await matche.create(
       { 

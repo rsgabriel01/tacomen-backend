@@ -61,8 +61,10 @@ module.exports = {
   },
 
   async show(req, res) {
-    const { userId, phaseId } = req.query;
+    const { userId } = req.query;
 
+    console.log(userId);
+    
     const userExists = await user.findOne({
       where: { id: userId }
     });
@@ -71,21 +73,12 @@ module.exports = {
       return res.json({ message: "User not exists" });
     }
 
-    const phaseExists = await phase.findOne({
-      where: { id: phaseId }
-    });
-
-    if (!phaseExists) {
-      return res.json({ message: "Phase not exists" });
-    }
-
     const usersPhasesFinded = await userPhase.findAll({
       where: { 
-        userId,
-        phaseId 
+        userId
       } 
     });
-
-    return res.json(usersPhasesFinded);
+    
+    return res.json(Object.assign({}, usersPhasesFinded));
   }
 };
