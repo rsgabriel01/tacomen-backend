@@ -33,7 +33,12 @@ module.exports = {
     });
 
     if (emailExists) {
-      return res.json({ message: "Email already exists" });
+      return res.json(
+        { 
+          statusCode: 400,
+          attention: "Email already exists"
+        }
+      );
     }
 
     const loginExists = await user.findOne({
@@ -41,12 +46,22 @@ module.exports = {
     });
 
     if (loginExists) {
-      return res.json({ message: "Login already exists" });
+      return res.json(
+        { 
+          statusCode: 400,
+          attention: "Login already exists" 
+        }
+      );
     }
 
     const userCreated = await user.create(req.body);
 
-    return res.json({ userCreated, message: "User successfully created" });
+    return res.json(
+      { 
+        statusCode: 200,
+        userCreated
+      }
+    );
   },
 
   async show(req, res) {
