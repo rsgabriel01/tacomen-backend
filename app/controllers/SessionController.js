@@ -11,7 +11,12 @@ module.exports = {
       });
   
       if (!loginExists) {
-        return res.json({ attention: "Login not found" });
+        return res.json(
+          { 
+            statusCode: 400 ,
+            attention: "Login not found"
+          }
+        );
       }
 
       const loginFinded = await user.findOne({
@@ -26,10 +31,15 @@ module.exports = {
       // console.log(login);
       
       if (!loginFinded) {
-        return res.json({ attention: "Incorrect password" });
+        return res.json(
+          { 
+            statusCode: 400,
+            attention: "Incorrect password"
+          }
+        );
       }
       
-      return res.json(loginFinded);
+      return res.json({ loginFinded, statusCode: 400 });
   }
 
 };
