@@ -13,8 +13,8 @@ module.exports = {
       if (!loginExists) {
         return res.json(
           { 
-            statusCode: 400 ,
-            attention: "Login not found"
+            statusCode: 400,
+            attention: "Parece que o usuário informado não existe no nosso banco de dados."
           }
         );
       }
@@ -34,12 +34,18 @@ module.exports = {
         return res.json(
           { 
             statusCode: 400,
-            attention: "Incorrect password"
+            attention: "Você digitou a senha incorreta. Tente novamente."
           }
         );
       }
       
-      return res.json({ loginFinded, statusCode: 400 });
+      return res.json(
+        { 
+          statusCode: 200,
+          success: "Login efetuado", 
+          loginFinded
+        }
+      );
   }
 
 };

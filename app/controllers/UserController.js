@@ -36,7 +36,7 @@ module.exports = {
       return res.json(
         { 
           statusCode: 400,
-          attention: "Email already exists"
+          attention: "Este email já está vinculado à uma conta. Por favor, informe outro."
         }
       );
     }
@@ -49,7 +49,7 @@ module.exports = {
       return res.json(
         { 
           statusCode: 400,
-          attention: "Login already exists" 
+          attention: "Este usuário já está sendo utilizado por outra pessoa. Por favor, informe outro." 
         }
       );
     }
@@ -59,7 +59,7 @@ module.exports = {
     return res.json(
       { 
         statusCode: 200,
-        userCreated
+        success: "Cadastro efetuado com sucesso."
       }
     );
   },
