@@ -126,7 +126,8 @@ module.exports = {
                               'FROM matche ' +
                               'INNER JOIN "userPhase" AS UP ON matche."userPhaseId" = UP.id ' +
                             'WHERE "userId" = ' + userId +
-                          '  GROUP BY "userId", "phaseId") AS totals_user) ', 
+                          '  GROUP BY "userId", "phaseId") AS totals_user) ' + 
+          'WHERE "userId" = ' + userId, 
         {
           type: QueryTypes.UPDATE
         }
